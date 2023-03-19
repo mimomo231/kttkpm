@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{product.title}}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>Cuốn sách: {{product.title}}</h3><hr>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{product.image}}" alt="{{product.slug}}" class="img-fluid">
+            <div class="row">
+                {% for pi in product.productimage_set.all %}
+                <div class="col-md-4 p-3">
+                    <a href="{{pi.image}}" target="_blank">
+                        <img src="{{pi.image}}" class="img-fluid" style="height: 100px; object-fit: contain;" alt="{{pi.product_id}}">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4>{{product.title}} (Số lần xem {{product.view_count}} lượt)</h4>
+            <h5>Thể loại: {{product.category}}</h5>
+            <h5>Giá: <strike> {{product.marked_price}} đ.</strike> {{product.selling_price}} đ.</h5>
+            <a href="{% url 'ecomapp:addtocart' product.id %}" class="btn btn-info">Thêm vào giỏ hàng</a>
+            <hr>
+            <p class="text-info">Thông tin sản phẩm:  {{product.info}}</p>
+            <p class="text-info">Chính sách hoàn trả: {{product.return_policy}}</p>
+            <hr>
+            <p>Tóm tắt: {{product.description}}</p>
+        </div>
+    </div>
+    <hr>
+    <h3> Hãy đánh giá cho quyển sách {{product.title}} </h3>
+    <label for="rate">Chọn đánh giá:</label>
+    <select name="rate" id="rate">
+      <option value="1">1 sao</option>
+      <option value="2">2 sao</option>
+      <option value="3">3 sao</option>
+      <option value="4">4 sao</option>
+      <option value="5" selected>5 sao</option>
+    </select>
+    <br><br>
+    <a href="#" class="btn btn-info">Gửi đánh giá</a>
+</div>
+{% endblock %}

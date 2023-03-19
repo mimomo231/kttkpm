@@ -1,0 +1,9 @@
+{% comment %} {% load ecomapp_tags %}  {% endcomment %}
+
+{% comment %} {% with allcategories as cats %}  {% endcomment %}
+{% for cat in allcategories %}
+<li>
+    <a href="http://127.0.0.1:8000/all-products/{{cat.slug}}">{{cat.title}}</a>
+</li>
+{% endfor %}
+ {% comment %} {% endwith %}  {% endcomment %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Search {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Kết quả cho <span class="text-info">"{{request.GET.keyword}}"</span></h3>
+            <hr>
+            {% for result in results %}
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{result.image}}" class="img-fluid" style="height: 250px; object-fit: contain;" alt="{{pi.product_id}}">
+                </div>
+                <div class="col-md-9">
+                    <h4><a href="{% url 'ecomapp:productdetail' result.slug %}">{{result.title}}</a></h4>
+                    <p>{{result.description|truncatewords:50}}</p>
+                    <p>Chính sách hoàn trả: {{result.return_policy}}</p>
+                    <h5>Giá: {{result.selling_price}} đ.</h5>
+                    <a href="{% url 'ecomapp:addtocart' result.id %}" class="btn btn-primary">Thêm vào giỏ</a>
+                </div>
+                <p> &nbsp</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
